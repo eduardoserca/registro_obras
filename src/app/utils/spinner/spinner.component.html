@@ -1,0 +1,35 @@
+<!-- <div class="wrap-spinner">
+  <div class="card">
+    <div class="card-body">
+      <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+      </div>
+      <div class="mensaje-spinner">
+        <h6>La consulta puede tardar 60 segundos</h6>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container-fluid vw-100 vh-100 mod-spinner">
+  <div class="row vh-100 justify-content-center align-items-center">
+    <div class="col-sm-3">
+      <div class="card shadow-sm rounded">
+        <div class="card-body">
+          <div class="text-center">
+            <!-- <img class="logo" src="assets/images/preloader.jpg" width="50"> -->
+            <img class="logo" src="./assets/images/preloader.gif" width="50">
+            <!-- <div class="spinner2">
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+            </div> -->
+          </div>
+        </div>
+        <div class="card-footer text-center" *ngIf="descripcion">
+          {{descripcion}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+/* You can add global styles to this file, and also import other style files */
+@media print {
+  @page {
+    size: landscape
+  }
+}
+
+@font-face {
+  font-family: montserrat-regular;
+  src: url(~assets/fonts/montserrat-regular-webfont.woff) format('woff');
+}
+
+@font-face {
+  font-family: montserrat-medium;
+  src: url(~assets/fonts/montserrat-medium-webfont.woff) format('woff');
+}
+
+@font-face {
+  font-family: montserrat-bold;
+  src: url(~assets/fonts/montserrat-bold-webfont.woff) format('woff');
+}
+
+.font-mr {
+  font-family: montserrat-regular !important;
+}
+
+.font-mb {
+  font-family: montserrat-bold !important;
+}
+
+.font-mm {
+  font-family: montserrat-medium !important;
+}
+
+/* body{
+     font-family: montserrat;
+ } */
+
+accordion-group.panel {
+  margin: 3px;
+}
+
+textarea {
+  resize: none;
+}
+
+.hiddenRow {
+  padding: 0 !important;
+}
+
+/* .toast-panel {
+    z-index: 1051 !important;
+    position: fixed !important;
+    top: 0 !important;
+} */
+
+/*Rules for sizing the icon*/
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+.row-hover {
+  cursor: pointer;
+}
+
+.row-hover:hover {
+  background-color: #f7f7f7;
+}
+
+/* .toast-panel{
+    z-index: 1051 !important;
+} */
+
+.toast-container .ngx-toastr {
+  border-radius: 3px !important;
+  box-shadow: 0 0 0px transparent !important;
+  /* box-shadow: 0px 0px 5px #CCC !important; */
+  border: 0px !important;
+}
+
+.toast-container .ngx-toastr:hover {
+  box-shadow: 0px 0px 7px rgb(167, 166, 166) !important;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.row-hover:hover {
+  background-color: #c7c7c7 !important;
+}
+
+._btnround {
+  border-radius: 24px;
+  padding: 8px 50px;
+}
+
+._btnround._color-warning {
+  background-color: #fecb11;
+  border-color: #fecb11;
+  box-shadow: 0 3px 6px 0 #ead790;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  cursor: inherit;
+  display: block;
+}
+
+/*.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  cursor: inherit;
+  display: block;
+}*/
+
+.form-control{
+  text-transform: uppercase;
+}
+._uppercase{
+  text-transform: uppercase;
+}

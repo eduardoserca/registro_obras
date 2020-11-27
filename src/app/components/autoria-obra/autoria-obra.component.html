@@ -1,0 +1,381 @@
+<!-- Spinner -->
+<!-- <ng-container *ngIf="spinner">
+  <app-spinner [descripcion]="spinnerMsg"></app-spinner>
+</ng-container> -->
+<!-- Spinner -->
+
+<!-- <app-example></app-example> -->
+
+<!-- <app-menu></app-menu>
+<app-banner-principal></app-banner-principal>
+<app-stepper [activo]="2"></app-stepper> -->
+
+<div class="container d-print-none">
+  <!-- Titulo -->
+  <!-- <div class="row">
+    <div class="col-sm text-left">
+      <h5 id="header-and-footer">
+        <span style="margin-right: 5px; vertical-align: middle;">
+          <img src="./assets/images/{{vcImg}}.png" draggable="false" width="50">
+        </span>
+        <span class="bd-content-title text-uppercase font-mb h4">{{vcTitulo}}</span>
+      </h5>
+    </div>
+  </div> -->
+  <!-- Titulo -->
+
+  <!-- Subtitulo -->
+  <!-- <div class="row mb-3">
+      <div class="col-sm text-left">
+          <small class="text-muted font-mr">-</small>
+      </div>
+  </div> -->
+  <!-- Subtitulo -->
+
+  <!-- Contenido -->
+  <div class="row">
+    <div class="col-sm">
+      <h4>Autoría de la obra</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <p>Serás considerado como autor de la obra que estás registrando</p>
+    </div>
+  </div>
+
+  <!-- Autor -->
+  <!-- <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <div class="row">
+        <b>Autor</b>
+      </div>
+      <div class="row">
+        <b>Persona Natural (DNI: 46454849)</b>
+      </div>
+      <div class="row">
+        Nombres y Apellidos: Ezio Gael Zavaleta Quispe
+      </div>
+      <div class="row">
+        Dirección: Lima/Lima/Surquilo - Av. Domingo Orue Nº 231
+      </div>
+    </li>
+  </ul> -->
+  <!-- Autor -->
+
+  <!-- Coautores -->
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let item of lstAutores; let row = index">
+      <!--INCIO LI-->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="row ">
+              <b>Autor {{row + 1}}&nbsp;</b>
+              <app-tooltip triggers="mouseenter:mouseleave" popover="{{objInfo.vcInfoAutor}}"> </app-tooltip>
+            </div>
+        
+      
+            <div class="row">
+              <b *ngIf="item.nuIdTipoDocumento!=1" >Persona Natural <span
+                  *ngIf="item.vcDescTipoDocumento">({{item.vcDescTipoDocumento}}:
+                  {{item.vcDocIdentidad}})</span></b>
+      
+                  <!-- <b *ngIf="item.nuIdTipoDocumento==1 && row==0 ">Persona Natural (DNI:&nbsp;
+                    {{item.vcDocIdentidad}})</b> -->
+      
+              <b *ngIf="item.nuIdTipoDocumento==1 " >Persona Natural (DNI:&nbsp;
+                {{item.vcDocIdentidad}})</b>
+      
+            </div>
+        
+      
+            <div class="row">
+              <b>Nombres y Apellidos: &nbsp;</b> {{item.vcNombres | uppercase }} {{item.vcApPaterno | uppercase }}
+              {{item.vcApMaterno | uppercase }}
+            </div>
+      
+            <div class="row" *ngIf="item.nuIdTipoDocumento == 1">
+              <b>Dirección:
+                &nbsp;</b> {{item.vcRutaUbigeo | uppercase }} {{item.vcDireccion | uppercase }}
+            </div>
+      
+            <div class="row" *ngIf="item.nuIdTipoDocumento != 1 && row == 0">
+              <b>Correo:
+                &nbsp;</b> {{globalService.vcCorreo}}
+            </div>
+      
+      
+            <div class="row" *ngIf="globalService.nroProceso == 2 && globalService.nuIdTipoObra == 9">
+              <div class="form-check form-check-inline">
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customControlValidation-1{{row}}"
+                    [checked]="item.nuFlagAutorLetra === 1" (change)="seleccionarAutor(row,1)">
+                  <label class="custom-control-label" for="customControlValidation-1{{row}}">Autor de Letra</label>
+                  <!-- <div class="invalid-feedback">Example invalid feedback text</div> -->
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customControlValidation-2{{row}}"
+                    [checked]="item.nuFlagAutorMusica === 1" (change)="seleccionarAutor(row,2)">
+                  <label class="custom-control-label" for="customControlValidation-2{{row}}">Autor de Música</label>
+                  <!-- <div class="invalid-feedback">Example invalid feedback text</div> -->
+                </div>
+                <!-- <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1">
+                <label class="form-check-label" for="inlineCheckbox1">Autor de Letra</label> -->
+              </div>
+              <!-- <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2">
+                <label class="form-check-label" for="inlineCheckbox2">Autor de Música</label>
+              </div> -->
+            </div>
+            <div class="row" *ngIf="row === 0 && blShowBtnCompletarDatos">
+              <!-- <div class="col-sm"> -->
+              <button type="button" class="btn btn-warning _btnround _color-warning"
+                (click)="completarDatos(modAgregarAutor)">
+                <i class=" fa fa-plus mr-3"></i>
+                Completar datos
+              </button>
+              <!-- </div> -->
+            </div>
+          </div>
+         
+          <div class="col col-lg-2">
+            <div class="float-right"  *ngIf="row>0">
+              <div type="button" class="btn btn-light float-right"
+              (click)="eliminarAutor(row)">ELIMINAR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+     
+
+      <!--FIN LI--->
+      
+    </li>
+    <!-- <li class="list-group-item">
+      <div class="float-right"><button type="button" class="btn btn-light">ELIMINAR</button></div>
+      <div class="row">
+        <b>Autor</b>
+      </div>
+      <div class="row">
+        <b>Persona Natural (DNI: 12345678)</b>
+      </div>
+      <div class="row">
+        <b>Nombres y Apellidos:</b> Nombre 1
+      </div>
+      <div class="row">
+        <b>Dirección:</b> Dirección 1
+      </div>
+    </li> -->
+    <!-- <li class="list-group-item">
+      <div class="float-right"><button type="button" class="btn btn-light">ELIMINAR</button></div>
+      <div class="row">
+        <b>Autor</b>
+      </div>
+      <div class="row">
+        <b>Persona Natural (DNI: 12345678)</b>
+      </div>
+      <div class="row">
+        <b>Nombres y Apellidos:</b> Nombre 1
+      </div>
+      <div class="row">
+        <b>Dirección:</b> Dirección 1
+      </div>
+    </li> -->
+  </ul>
+
+
+  <div class="row mt-3" *ngIf="!blShowBtnCompletarDatos">
+    <div class="col-sm">
+      <p>Si tu obra tiene coautores, deberás agregarlos</p>
+    </div>
+  </div>
+  <div class="row" *ngIf="!blShowBtnCompletarDatos">
+    <div class="col-sm">
+      <button type="button" class="btn btn-warning _btnround _color-warning"
+        (click)="modalAgregarAutor(modAgregarAutor)">
+        <i class=" fa fa-plus mr-3"></i>
+        Agregar autor
+      </button>
+    </div>
+  </div>
+  <!-- Coautores -->
+
+  <!-- Contenido -->
+
+  <!-- Botones -->
+  <!-- <div class="row mt-3">
+    <div class="col-sm">
+      <hr>
+      <button type="submit" class="btn btn-default float-left" (click)="atras()">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning" (click)="siguiente()">Siguiente
+        <i class="fa fa-arrow-right ml-3"></i></button>
+    </div>
+  </div> -->
+  <!-- Botones -->
+</div>
+
+<!-- Modal agregar autor -->
+<ng-template #modAgregarAutor>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Agregar autor [cesc]</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <form [formGroup]="agregarAutorForm" autocomplete="off">
+        <div class="form-row">
+          <div class="form-group col-sm-6">
+            <label for="cb-tipo-documento"><b>Tipo de documento:</b></label>
+            <select id="cb-tipo-documento" class="form-control" formControlName="nuTipoDocumento" (change)="cambiaTipoDocumento()">
+              <option *ngFor="let item of lstTipoDocumentos" [value]="item.nuIdTipoDocumento">
+                <!-- <option *ngFor="let item of objDataGenerica.lstTipoDocumentos" [value]="item.nuIdTipoDocumento"> -->
+                {{item.vcDesTipoDocumento}}</option>
+            </select>
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+            anyone
+            else.</small> -->
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="txt-nro-documento"><b>Número de documento:</b></label>
+            <div class="input-group">
+              <input 
+                type="text" 
+                class="form-control" 
+                id="txt-nro-documento" 
+                placeholder=""
+                formControlName="vcNroDocumento" 
+                (keypress)="numericDocumentoOnly($event)" 
+                (keyup.enter)="onEnter()"
+                [readonly]="!agregarAutorForm.invalid"  
+                maxlength="10">
+              <div class="input-group-append">
+                <!-- *ngIf="agregarAutorForm.controls.nuTipoDocumento.value === 1" -->
+                <button class="btn btn-outline-primary" type="button" id="button-addon2"
+                  [disabled]="agregarAutorForm.controls.nuTipoDocumento.value != 1" (click)="buscarPide()"  [disabled]="!agregarAutorForm.invalid"><i
+                    class="fa fa-search"></i></button>
+              </div>
+              <!-- {{agregarAutorForm.controls.nuTipoDocumento.value === '1'}}
+              {{agregarAutorForm.controls.nuTipoDocumento.value === 1}} -->
+            </div>
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+            anyone
+            else.</small> -->
+          </div>
+        </div>
+
+        <div class="form-row" *ngIf="blShowPersonaPide">
+          <div class="form-group col-sm-6">
+            <label for="txt-nombres"><b>Nombres:</b></label>
+            <label id="lbl-nombres" class="form-text" *ngIf="blShowLabelPide">
+              {{objAutor.vcReniecNombres}}
+            </label>
+            <input type="text" class="form-control" id="txt-nombres" placeholder="Ingrese nombres"
+              formControlName="vcNombres" *ngIf="blShowInputPide" autocomplete="nope" maxlength="60">
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+            anyone
+            else.</small> -->
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="txt-primer-apellido"><b>Primer Apellido:</b></label>
+            <label id="lbl-primer-apellido" class="form-text" *ngIf="blShowLabelPide">
+              {{objAutor.vcReniecApPaterno}}
+            </label>
+            <input type="text" class="form-control" id="txt-primer-apellido" placeholder="Ingrese primer apellido"
+              formControlName="vcPrimerApellido" *ngIf="blShowInputPide" autocomplete="nope" maxlength="60">
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+            anyone
+            else.</small> -->
+          </div>
+        </div>
+        <div class="form-row" *ngIf="blShowPersonaPide">
+          <div class="form-group col-sm-6">
+            <label for="txt-segundo-apellido"><b>Segundo Apellido:</b></label>
+            <label id="lbl-segundo-apellido" class="form-text" *ngIf="blShowLabelPide">
+              {{objAutor.vcReniecApMaterno}}
+            </label>
+            <input type="text" class="form-control" id="txt-segundo-apellido" placeholder="Ingrese segundo apellido"
+              formControlName="vcSegundoApellido" *ngIf="blShowInputPide" autocomplete="nope" maxlength="60">
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+            anyone
+            else.</small> -->
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="cb-departamento"
+              *ngIf="!blErrorPide && agregarAutorForm.controls.nuTipoDocumento.value == 1"><b>Ubigeo:</b></label>
+            <label for="cb-departamento"
+              *ngIf="blErrorPide && agregarAutorForm.controls.nuTipoDocumento.value == 1"><b>Departamento:</b></label>
+            <label for="cb-pais" *ngIf="agregarAutorForm.controls.nuTipoDocumento.value > 1"><b>País:</b></label>
+            <label id="lbl-ubigeo" class="form-text" *ngIf="blShowLabelPide && !blShowInputPide">
+              {{objAutor.vcReniecUbigeo}}
+            </label>
+            <select id="cb-pais" class="form-control" formControlName="nuPais"
+              *ngIf="blShowInputPide && agregarAutorForm.controls.nuTipoDocumento.value > 1">
+              <option value="" disabled selected hidden>Seleccione...</option>
+              <option *ngFor="let item of lstPaises" [value]="item.nuIdPais">
+                {{item.vcPais}}</option>
+            </select>
+            <select id="cb-departamento" class="form-control" formControlName="nuDepartamento"
+              *ngIf="blShowInputPide && agregarAutorForm.controls.nuTipoDocumento.value == 1">
+              <option value="" disabled selected hidden>Seleccione...</option>
+              <option *ngFor="let item of lstDepartamento" [value]="item.nuIdDepartamento">
+                {{item.vcDepartamento}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row"
+          *ngIf="blShowPersonaPide && blShowInputPide && agregarAutorForm.controls.nuTipoDocumento.value == 1">
+          <div class="form-group col-sm-6">
+            <label for="cb-provincia"><b>Provincia:</b></label>
+            <select id="cb-provincia" class="form-control" formControlName="nuProvincia"
+              *ngIf="blShowInputPide && agregarAutorForm.controls.nuTipoDocumento.value == 1">
+              <option value="" disabled selected hidden>Seleccione...</option>
+              <option *ngFor="let item of lstProvincia" [value]="item.nuIdProvincia">
+                {{item.vcProvincia}}</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-6"
+            *ngIf="blShowPersonaPide && agregarAutorForm.controls.nuTipoDocumento.value == 1">
+            <label for="cb-distrito"><b>Distrito:</b></label>
+            <select id="cb-distrito" class="form-control" formControlName="nuDistrito"
+              *ngIf="blShowInputPide && agregarAutorForm.controls.nuTipoDocumento.value == 1">
+              <option value="" disabled selected hidden>Seleccione...</option>
+              <option *ngFor="let item of lstDistrito" [value]="item.nuIdDistrito">
+                {{item.vcDistrito}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" *ngIf="blShowPersonaPide && agregarAutorForm.controls.nuTipoDocumento.value == 1">
+          <div class="form-group col-sm-12">
+            <label for="txt-direccion"><b>Dirección:</b></label>
+            <label id="lbl-direccion" class="form-text" *ngIf="blShowLabelPide">
+              {{objAutor.vcReniecDireccion}}
+            </label>
+            <textarea class="form-control" id="txt-direccion" placeholder="Ingrese dirección"
+              formControlName="vcDireccion" *ngIf="blShowInputPide" autocomplete="nope" maxlength="250"></textarea>
+          </div>
+        </div>
+      </form>
+      <div class="card">
+        <div class="card-body">
+          Nota: Los autores serán considerados como titulares de la obra literaria
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="agregarAutor()"
+      [disabled]="agregarAutorForm.invalid">Agregar</button>
+  </div>
+</ng-template>
+<!-- Modal agregar autor -->

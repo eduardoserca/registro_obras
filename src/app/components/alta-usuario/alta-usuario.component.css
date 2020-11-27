@@ -1,0 +1,14 @@
+
+  @media (max-width: 575px) {
+    .imagen {
+        width: auto;
+    }
+  
+}
+
+@media (min-width: 576px) {
+    .imagen {
+        width: 30%;
+    }
+  
+}

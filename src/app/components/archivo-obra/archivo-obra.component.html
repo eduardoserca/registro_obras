@@ -1,0 +1,226 @@
+<!-- Spinner -->
+<!-- <ng-container *ngIf="spinner">
+  <app-spinner [descripcion]="spinnerMsg"></app-spinner>
+</ng-container> -->
+<!-- Spinner -->
+
+<!-- <app-example></app-example> -->
+
+<!-- <app-menu></app-menu>
+<app-banner-principal></app-banner-principal>
+<app-stepper [activo]="3"></app-stepper> -->
+
+<div class="container d-print-none">
+
+  <!-- Titulo -->
+  <!-- <div class="row">
+    <div class="col-sm text-left">
+      <h5 id="header-and-footer">
+        <span style="margin-right: 5px; vertical-align: middle;">
+          <img src="./assets/images/{{vcImg}}.png" draggable="false" width="50">
+        </span>
+        <span class="bd-content-title text-uppercase font-mb h4">{{vcTitulo}}</span>
+      </h5>
+    </div>
+  </div> -->
+  <!-- Titulo -->
+
+  <!-- Subtitulo -->
+  <!-- <div class="row mb-3">
+    <div class="col-sm text-left">
+      <small class="text-muted font-mr">-</small>
+    </div>
+  </div> -->
+  <!-- Subtitulo -->
+
+  <!-- Contenido -->
+  <div class="row">
+    <div class="col-sm">
+      <h4>Adjuntar archivo digital de la Obra <app-tooltip triggers="mouseenter:mouseleave"  popover="{{objInfo.vcInfoTitulo}}" > </app-tooltip>
+      </h4>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-sm">
+      <p>Adjunta los siguientes archivos &nbsp;<app-tooltip _tooltip="Info"> </app-tooltip>
+      </p>
+    </div>
+  </div> -->
+  <div class="row" *ngIf="!lstArchivo[0]">
+    <div class="col-sm">
+      <div class="btn btn-light btn-file">
+        <!-- <button type="button" class="btn btn-light btn-file"> -->
+        <!-- <button type="button" class="btn btn-warning btn-file _btnround _color-warning"> -->
+        <i class="fa fa-plus mr-3"></i>
+        Adjuntar Obra {{vcAdjuntar}} 
+        <input type="file" (change)="cargarObraLiteraria($event)" #input_archivo_obra >
+        <!-- </button> -->
+      </div>
+      <!-- <input type="file" (change)="cargarObraLiteraria($event)"> -->
+    </div>
+  </div>
+  <div class="row" *ngIf="lstArchivo[0]">
+    <div class="col-sm-3 my-auto">
+      <b>Obra {{vcAdjuntar}}</b>
+    </div>
+    <div class="col-sm-9">
+      <button type="button" class="btn btn-outline-secondary" (click)="eliminarArchivo(0)">
+        {{lstArchivo[0].vcNomOriginal}}
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row mt-3" *ngIf="!lstArchivo[1]" [hidden]="blHideBtnDerivada">
+    <div class="col-sm">
+      <div class="btn btn-light btn-file">
+        <!-- <button type="button" class="btn btn-light btn-file"> -->
+        <!-- <button type="button" class="btn btn-warning btn-file  _btnround _color-warning"> -->
+        <i class="fa fa-plus mr-3"></i>
+        En caso de obra derivada: Adjuntar autorización del autor de la obra originaria
+        <input type="file" (change)="cargarAutorizacion($event)" #input_archivo_autorizacion >
+        <!-- </button> -->
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3" *ngIf="lstArchivo[1]">
+    <div class="col-sm-3 my-auto">
+      <b>Autorización de autor de obra originaria</b>
+    </div>
+    <div class="col-sm-9">
+      <button type="button" class="btn btn-outline-secondary" (click)="eliminarArchivo(1)">
+        {{lstArchivo[1].vcNomOriginal}}
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm">
+      <h4>Anexos</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <p>Si cuentas con anexos que deseas adjuntar a tu solicitud, adjúntalos aquí &nbsp;<app-tooltip
+        triggers="mouseenter:mouseleave"   popover="{{objInfo.vcInfoAnexos}}">
+        </app-tooltip>
+      </p>
+    </div>
+  </div>
+  <div class="row mb-3" *ngFor="let item of lstArchivo; let row = index">
+    <!-- <div class="row mt-3 mb-3" *ngFor="let item of filterLstArchivo(lstArchivo); let row = index"> -->
+    <div class="col-md-3 my-auto" *ngIf="item?.nuIdTipoArchivo == 0">
+      <b>Anexo {{row-1}}</b>
+    </div>
+    <div class="col-md-9" *ngIf="item?.nuIdTipoArchivo == 0">
+      <button type="button" class="btn btn-outline-secondary" (click)="eliminarArchivo(row)">
+        {{item?.vcNomOriginal}}
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <!-- <div class="row"> -->
+    <div class="col-sm">
+      <div class="btn btn-light btn-file">
+        <!-- <button type="button" class="btn btn-light btn-file"> -->
+        <!-- <button type="button" class="btn btn-warning btn-file  _btnround _color-warning"> -->
+        <i class="fa fa-plus mr-3"></i>
+        Cargar anexo
+        <input type="file" (change)="cargarAnexo($event)" #input_archivo_anexo >
+        <!-- </button> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row"> -->
+  <!-- <div class="col-sm-12"> -->
+  <!-- Autor -->
+  <!-- <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+          <div class="row">
+              <b>Autor</b>
+          </div>
+          <div class="row">
+              <b>Persona Natural (DNI: 12345678)</b>
+          </div>
+          <div class="row">
+              <b>Nombres y Apellidos:</b> Nombre 1
+          </div>
+          <div class="row">
+              <b>Dirección:</b> Dirección 1
+          </div>
+      </li>
+  </ul> -->
+  <!-- Autor -->
+  <!-- </div> -->
+  <!-- </div> -->
+
+  <!-- <div class="row">
+      <div class="col-sm-12"> -->
+  <!-- Coautores -->
+  <!-- <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+          <div class="float-right"><button type="button" class="btn btn-light">ELIMINAR</button></div>
+          <div class="row">
+              <b>Autor</b>
+          </div>
+          <div class="row">
+              <b>Persona Natural (DNI: 12345678)</b>
+          </div>
+          <div class="row">
+              <b>Nombres y Apellidos:</b> Nombre 1
+          </div>
+          <div class="row">
+              <b>Dirección:</b> Dirección 1
+          </div>
+      </li>
+      <li class="list-group-item">
+          <div class="float-right"><button type="button" class="btn btn-light">ELIMINAR</button></div>
+          <div class="row">
+              <b>Autor</b>
+          </div>
+          <div class="row">
+              <b>Persona Natural (DNI: 12345678)</b>
+          </div>
+          <div class="row">
+              <b>Nombres y Apellidos:</b> Nombre 1
+          </div>
+          <div class="row">
+              <b>Dirección:</b> Dirección 1
+          </div>
+      </li>
+  </ul> -->
+  <!-- Coautores -->
+  <!-- </div>
+  </div> -->
+
+  <!-- <div class="row mt-3">
+      <div class="col-sm">
+          <p>Si su obra tiene coautores, deberá agregarlos</p>
+      </div>
+  </div> -->
+  <!-- <div class="row">
+      <div class="col-sm">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+              <i class="fa fa-plus"></i>
+              Agregar autor
+          </button>
+      </div>
+  </div> -->
+
+
+  <!-- Contenido -->
+
+  <!-- Botones -->
+  <!-- <div class="row mt-3">
+    <div class="col-sm">
+      <hr>
+      <button type="submit" class="btn btn-default float-left" routerLink="/autoria-obra">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning" (click)="siguiente()">Siguiente
+        <i class="fa fa-arrow-right ml-3"></i></button>
+    </div>
+  </div> -->
+  <!-- Botones -->
+</div>

@@ -1,0 +1,295 @@
+<!-- Spinner -->
+<!-- <ng-container *ngIf="spinner">
+  <app-spinner [descripcion]="spinnerMsg"></app-spinner>
+</ng-container> -->
+<!-- Spinner -->
+
+<!-- <app-example></app-example> -->
+
+<!-- <app-menu></app-menu>
+<app-banner-principal></app-banner-principal>
+<app-stepper [activo]="1"></app-stepper> -->
+
+<div class="container d-print-none">
+
+  <!-- Titulo -->
+  <!-- <div class="row">
+    <div class="col-sm text-left">
+      <h5 id="header-and-footer">
+        <span style="margin-right: 5px; vertical-align: middle;">
+          <img src="./assets/images/{{vcImg}}.png" draggable="false" width="50">
+        </span>
+        <span class="bd-content-title text-uppercase font-mb h4">{{vcTitulo}}</span>
+      </h5>
+    </div>
+  </div> -->
+  <!-- Titulo -->
+
+  <!-- Subtitulo -->
+  <!-- <div class="row mb-3">
+    <div class="col-sm text-left">
+      <small class="text-muted font-mr">-</small>
+    </div>
+  </div> -->
+  <!-- Subtitulo -->
+
+  <!-- Contenido -->
+  <form [formGroup]="datosObraForm">
+    <div class="form-group">
+      <label for="txt-titulo-obra-literaria">
+        <b>Título de la obra {{objLabel.vcTituloObra}}</b>
+        <app-tooltip triggers="mouseenter:mouseleave" popover="{{objInfo.vcTituloObra}}"> </app-tooltip>
+      </label>
+      <input id="txt-titulo-obra-literaria" type="text" class="form-control" placeholder="Ingrese el título de la obra"
+        formControlName="vcTitulo" autocomplete="off" maxlength="255">
+      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+        else.</small> -->
+    </div>
+    <div class="form-row" *ngIf="blShowDatosTipoObra">
+      <div class="col-md-6 mb-3">
+        <label for="cb-tipo-obra">
+          <b>Tipo de obra</b>
+          <app-tooltip triggers="mouseenter:mouseleave" popover="{{objInfo.vcTipoObra}}" >
+          </app-tooltip>
+        </label>
+        <select id="cb-tipo-obra" class="form-control" formControlName="nuIdTipoObra">
+          <option value="" disabled selected hidden>Seleccione...</option>
+          <option *ngFor="let item of lstTiposObra" [value]="item.nuIdTipoObra">
+            {{item.vcDesTipoObra}}</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3" *ngIf="blShowDatosOtroTipoObra">
+        <label for="txt-otro-tipo-obra">
+          <b>Otro tipo de obra</b>
+          <app-tooltip triggers="mouseenter:mouseleave"  popover="Info"> </app-tooltip>
+        </label>
+        <input id="txt-otro-tipo-obra" type="text" class="form-control" formControlName="vcOtroTipoObra"
+          autocomplete="off" maxlength="40">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-12">
+          <label>
+            <b>¿La obra se publicó?</b>
+            <app-tooltip triggers="mouseenter:mouseleave" popover="{{objInfo.vcLaObraSePublico}}">
+            </app-tooltip>
+          </label>
+        </div>
+      </div>
+      <div class="form-check form-check-inline">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" id="nuFlagPublicacion1" type="radio" [value]="1"
+            formControlName="nuFlagPublicacion">
+          <label class="custom-control-label" for="nuFlagPublicacion1">Sí</label>
+        </div>
+      </div>
+      <div class="form-check form-check-inline">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" id="nuFlagPublicacion2" type="radio" [value]="0"
+            formControlName="nuFlagPublicacion">
+          <label class="custom-control-label" for="nuFlagPublicacion2">No</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-row" *ngIf="blShowDatosObraLiteraria">
+      <div class="col-md-6 mb-3">
+        <label for="cb-lugar-publicacion">
+          <b>Lugar de publicación</b>
+          <app-tooltip triggers="mouseenter:mouseleave" popover="{{objInfo.vcLugarPublicacion}}"> </app-tooltip>
+        </label>
+        <select id="cb-lugar-publicacion" class="form-control" formControlName="nuLugarPublicacion">
+          <option value="" disabled selected hidden>Seleccione...</option>
+          <option *ngFor="let item of lstPaises" [value]="item.nuIdPais">
+            {{item.vcPais}}</option>
+        </select>
+        <!-- <select id="cb-lugar-publicacion" class="custom-select" formControlName="nuLugarPublicacion">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select> -->
+        <!-- <div class="valid-feedback">
+                  Looks good!
+              </div> -->
+      </div>
+      <div class="col-md-6 mb-3" *ngIf="blShowDatosObraLiteraria">
+        <label for="txt-fecha-publicacion">
+          <b>Fecha de publicación</b>
+          <app-tooltip triggers="mouseenter:mouseleave"  popover="{{objInfo.vcFechaPublicacion}}"> </app-tooltip>
+        </label>
+        <div class="input-group">
+          <input id="txt-fecha-publicacion" type="text" placeholder="Seleccione fecha" class="form-control"
+            formControlName="dtFechaPublicacion" bsDatepicker readonly>
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+          </div>
+        </div>
+        <!-- <input id="txt-fecha-publicacion" type="date" class="form-control" formControlName="dtFechaPublicacion"> -->
+        <!-- <input id="txt-fecha-publicacion" type="text" placeholder="Seleccione fecha" class="form-control"
+          formControlName="dtFechaPublicacion" bsDatepicker readonly> -->
+        <!-- <div class="valid-feedback">
+                  Looks good!
+              </div> -->
+      </div>
+      <!-- <div class="col-md-4 mb-3">
+              <label for="validationCustomUsername">Username</label>
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                  </div>
+                  <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username"
+                      aria-describedby="inputGroupPrepend" required>
+                  <div class="invalid-feedback">
+                      Please choose a username.
+                  </div>
+              </div>
+          </div> -->
+    </div>
+    <div class="form-row" *ngIf="blShowNroEdicion">
+      <div class="col-md-6 mb-3">
+        <label for="txt-nro-edicion">
+         <b>Número de edición</b>
+          <app-tooltip triggers="mouseenter:mouseleave"  popover="{{objInfo.vcNumeroEdicion}}"> </app-tooltip>
+        </label>
+        <input id="txt-nro-edicion" type="text" class="form-control" min="1" step="1"
+          placeholder="Ingrese número de edición" (keypress)="numericOnly($event)"  (keyup)="numeroEdicion()" formControlName="nuNumEdicion" min="1" max="99" >
+        <!-- <div class="valid-feedback">
+                      Looks good!
+        </div> -->
+      </div>
+      <div class="col-md-6 mb-3" *ngIf="blShowNroEjemplares">
+        <label for="txt-nro-ejemplares">
+         <b>Número de ejemplares</b>
+          <app-tooltip triggers="mouseenter:mouseleave"  popover="{{objInfo.vcNumeroEjemplares}}"> </app-tooltip>
+        </label>
+        <input id="txt-nro-ejemplares" type="text" class="form-control" min="1" step="1"
+          placeholder="Ingrese número de ejemplares" (keypress)="numericOnly($event)" (keyup)="numeroEjemplares()" formControlName="nuNumEjemplar" maxlength="7">
+        <!-- <div class="valid-feedback">
+                      Looks good!
+                  </div> -->
+      </div>
+      <!-- <div class="col-md-4 mb-3">
+                  <label for="validationCustomUsername">Username</label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      </div>
+                      <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username"
+                          aria-describedby="inputGroupPrepend" required>
+                      <div class="invalid-feedback">
+                          Please choose a username.
+                      </div>
+                  </div>
+              </div> -->
+    </div>
+    <!-- <div class="form-group">
+          <div class="row">
+              <div class="col-sm-12">
+                  <label>Número de edición y número de ejemplares</label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-6">
+                  <input type="number" class="form-control" min="1" step="1"
+                      placeholder="Ingrese número de edición">
+              </div>
+              <div class="col-sm-6">
+                  <input type="number" class="form-control" min="1" step="1"
+                      placeholder="Ingrese número de ejemplares">
+              </div>
+          </div>
+      </div> -->
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-12">
+          <label>
+           <b>¿La obra es originaria o derivada?</b>
+            <app-tooltip  triggers="mouseenter:mouseleave" popover="{{objInfo.vcLaObraOriginariaODerivada}}">
+            </app-tooltip>
+          </label>
+        </div>
+      </div>
+      <div class="form-check form-check-inline">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" id="nuFlagDerivacion1" type="radio" [value]="0"
+            formControlName="nuFlagDerivacion">
+          <label class="custom-control-label" for="nuFlagDerivacion1">Originaria</label>
+        </div>
+      </div>
+      <div class="form-check form-check-inline">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" id="nuFlagDerivacion2" type="radio" [value]="1"
+            formControlName="nuFlagDerivacion">
+          <label class="custom-control-label" for="nuFlagDerivacion2">Derivada</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="blShowDatosObraDerivada">
+      <label for="txt-titulo-obra-originaria">
+        <b>Título de la obra originaria</b>
+        <app-tooltip triggers="mouseenter:mouseleave"  popover="{{objInfo.vcTituloObraOriginaria}}"> </app-tooltip>
+      </label>
+      <input id="txt-titulo-obra-originaria" type="text" class="form-control"
+        placeholder="Ingrese el título de la obra originaria" formControlName="vcTiObOriginaria" autocomplete="off" maxlength="250">
+    </div>
+    <div class="form-group" *ngIf="blShowDatosObraDerivada">
+      <div class="row">
+        <div class="col-sm-12">
+          <label>
+            <b>¿Eres el autor de la obra originaria?</b>
+            <app-tooltip triggers="mouseenter:mouseleave"  popover="{{objInfo.vcEsAutorDeObraOriginaria}}">
+            </app-tooltip>
+          </label>
+        </div>
+      </div>
+      <div class="form-check form-check-inline">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" id="nuFlagAutorObOri1" type="radio" [value]="1"
+            formControlName="nuFlagAutorObOri">
+          <label class="custom-control-label" for="nuFlagAutorObOri1">Sí</label>
+        </div>
+      </div>
+      <div class="form-check form-check-inline">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" id="nuFlagAutorObOri2" type="radio" [value]="0"
+            formControlName="nuFlagAutorObOri">
+          <label class="custom-control-label" for="nuFlagAutorObOri2">No</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="blShowDatosObraOriginaria">
+      <label for="txt-nombre-autor-obra-originaria">
+        <b>Nombre del autor de la obra originaria</b>
+        <app-tooltip triggers="mouseenter:mouseleave"  popover="{{objInfo.vcNombreAutorObraOriginaria}}">
+        </app-tooltip>
+      </label>
+      <input id="txt-nombre-autor-obra-originaria" type="text" class="form-control"
+        placeholder="Ingrese el nombre del autor de la obra originaria" formControlName="vcAutorObOri"
+        autocomplete="off" maxlength="150">
+      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+        else.</small> -->
+    </div>
+    <!-- <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div> -->
+    <!-- <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div> -->
+  </form>
+  <!-- Contenido -->
+
+  <!-- Botones -->
+  <!-- <div class="row mt-3">
+    <div class="col-sm">
+      <hr>
+      <button type="submit" class="btn btn-default float-left" routerLink="/inicio">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning" (click)="siguiente()"
+        [disabled]="datosObraForm.invalid">Siguiente <i class="fa fa-arrow-right ml-3"></i></button>
+    </div>
+  </div> -->
+  <!-- Botones -->
+</div>

@@ -1,0 +1,217 @@
+<!-- Spinner -->
+<!-- <ng-container *ngIf="spinner">
+  <app-spinner [descripcion]="spinnerMsg"></app-spinner>
+</ng-container> -->
+<!-- Spinner -->
+
+<!-- <app-example></app-example> -->
+
+<!-- <app-menu></app-menu>
+<app-banner-principal></app-banner-principal>
+<app-stepper [activo]="4"></app-stepper> -->
+
+<div class="container d-print-none">
+
+  <!-- Titulo -->
+  <!-- <div class="row">
+    <div class="col-sm text-left">
+      <h5 id="header-and-footer">
+        <span style="margin-right: 5px; vertical-align: middle;">
+          <img src="./assets/images/{{vcImg}}.png" draggable="false" width="50">
+        </span>
+        <span class="bd-content-title text-uppercase font-mb h4">{{vcTitulo}}</span>
+      </h5>
+    </div>
+  </div> -->
+  <!-- Titulo -->
+
+  <!-- Subtitulo -->
+  <!-- <div class="row mb-3">
+    <div class="col-sm text-left">
+      <small class="text-muted font-mr">-</small>
+    </div>
+  </div> -->
+  <!-- Subtitulo -->
+
+  <!-- Contenido -->
+  <div class="row">
+    <div class="col-sm">
+      <h4>Monto del arancel a pagar</h4>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-sm">
+      <p>Usted será considerado como autor de la obra que está registrando &nbsp;<app-tooltip _tooltip="Info">
+        </app-tooltip>
+      </p>
+    </div>
+  </div> -->
+
+  <!-- tabla de aranceles -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <!-- <caption>List of users</caption> -->
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Arancel</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Monto</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lstAranceles; let row = index">
+              <th scope="row">{{row+1}}</th>
+              <td>{{item.vcDescArancel}}</td>
+              <td>1</td>
+              <td>S/ {{item.nuImporteBruto}}</td>
+              <td>S/ {{item.nuImporteNeto}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- tabla de aranceles -->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card text-white bg-warning">
+        <div class="card-body py-2 font-weight-bold">
+          Total a pagar: S/ {{sumTotalArancel}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm">
+      <h4>Registra tu pago</h4>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-sm">
+      <p>Agregue el arancel para proceder con el registro de su obra &nbsp;<app-tooltip triggers="mouseenter:mouseleave"
+           popover="{{objInfo.vcInfoRegistraPago}}">
+        </app-tooltip>
+      </p>
+    </div>
+  </div>
+
+  <!-- Pago -->
+  <ul class="list-group list-group-flush" *ngIf="blValidarPago">
+    <li class="list-group-item">
+      <div class="float-right"><button type="button" class="btn btn-light" (click)="eliminarPago()">ELIMINAR</button>
+      </div>
+
+      <div class="row float-left">
+        <b>Arancel de Registro de Obras {{objLabel.vcLblArancel}}</b>
+      </div>
+      <br>
+      <div class="row float-left">
+        <span>Fecha: {{objPago.dtFechaOperacion}}</span>
+      </div>
+      <br>
+      <div class="row">
+        <span>Número de operación: {{objPago.vcNroOperacion}}</span>
+      </div>
+      <div class="row">
+        <span>Monto: S/ {{objPago.montoArancel}}</span>
+      </div>
+    </li>
+  </ul>
+  <!-- Pago -->
+
+  <!-- Registro de pago -->
+  <div class="row" *ngIf="!blValidarPago">
+    <div class="col-sm-6">
+      <form [formGroup]="pagoForm">
+        <div class="form-group">
+          <label for="txtTituloObraLiteraria"><b>Fecha de operación</b></label>
+          <div class="input-group">
+            <input type="text" placeholder="Seleccione fecha de operación" class="form-control"
+              formControlName="dtFechaOperacion" bsDatepicker readonly>
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+            </div>
+          </div>
+          <!-- <input type="text" placeholder="Seleccione fecha de operación" class="form-control"
+            formControlName="dtFechaOperacion" bsDatepicker readonly> -->
+          <!-- <input type="date" class="form-control" placeholder="Ingrese fecha de operación"
+            formControlName="dtFechaOperacion"> -->
+        </div>
+        <div class="form-group">
+          <label for="txtTituloObraLiteraria"><b>Número de operación</b></label>
+          <input type="text" class="form-control" placeholder="Ingrese número de operación"
+            formControlName="vcNroOperacion" (keypress)="numericOnly($event)">
+
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <button type="button" class="btn btn-warning _btnround _color-warning" (click)="agregarPago()"
+              [disabled]="pagoForm.invalid">
+              <i class=" fa fa-plus mr-3"></i>
+              Agregar pago
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-6 mt-3">
+      <div>
+          <div class="row" >
+         <div class="col-sm-12 mt-3">
+          Ingresando al enlace&nbsp;<a href="https://www.pagalo.pe" target="_blank">pagalo.pe</a>&nbsp;puede pagar sus aranceles utilizando tarjetas de crédito o débito Visa, MasterCard y American Express
+         </div>
+        </div>
+        <tabset>
+          <tab heading="Pagalo.pe" id="tab1">
+            <img src="./assets/images/pagalo-voucher.png" width="80%" draggable="false">
+            <!-- <a href="https://pagalo.pe/" target="_blank">https://www.pagalo.pe</a> -->
+          </tab>
+          <tab heading="Banco de la Nación">
+            <img src="./assets/images/bn-voucher.png" width="80%" draggable="false">
+          </tab>
+        </tabset>
+      </div>
+      <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pagalo-pe-tab" data-toggle="tab" href="#pagalo-pe" role="tab"
+            aria-controls="pagalo-pe" aria-selected="true">Pagalo.pe</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="bn-tab" data-toggle="tab" href="#bn" role="tab" aria-controls="bn"
+            aria-selected="false">Banco de la Nación</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="pagalo-pe" role="tabpanel" aria-labelledby="pagalo-pe-tab">
+          pagalo.pe
+        </div>
+        <div class="tab-pane fade" id="bn" role="tabpanel" aria-labelledby="bn-tab">
+          banco de la nación
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <!-- Registro de pago -->
+
+  <!-- Contenido -->
+
+  <!-- Botones -->
+  <!-- <div class="row mt-3">
+    <div class="col-sm">
+      <hr>
+      <button type="submit" class="btn btn-default float-left" routerLink="/archivo-obra">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning" (click)="siguiente()"
+        [disabled]="!blValidarPago">Siguiente <i class="fa fa-arrow-right ml-3"></i></button>
+    </div>
+  </div> -->
+  <!-- Botones -->
+</div>

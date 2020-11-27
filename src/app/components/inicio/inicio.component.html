@@ -1,0 +1,151 @@
+<ng-container *ngIf="spinner">
+  <app-spinner [descripcion]="spinnerMsg"></app-spinner>
+</ng-container>
+<app-menu></app-menu>
+<app-banner-principal></app-banner-principal>
+
+<div class="container" >
+  <div class="row justify-content-around">
+    <div class="ctn-steps step0  col-md-9">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm mt-3 mb-2">
+            <br />
+            <h1>Hola,</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm mt-2 mb-3">
+            <h3>
+              Inicia el proceso de registro de tu obra aquí. <app-tooltip
+                triggers="mouseenter:mouseleave"
+                popover="La Dirección de Derecho de Autor del Indecopi pone a su disposición la plataforma virtual de Registro de Obras que le permitirá solicitar el registro de sus creaciones con la finalidad de obtener un certificado de autoría de su obra. "
+                >
+              </app-tooltip>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-sm mb-3 text-center" *ngFor="let item of lstProcesos; let row = index;">
+            <div class="sector">
+              <a class="lnkSector text-center" (click)="rutaNavegacion(item)">
+                <img src="{{item.vcImgLogo}}">
+                <p class="mt-1 text-center">{{item.vcTituloCorto}}</p>
+              </a>
+              <span placement="auto"  class="toopltip" triggers="mouseenter:mouseleave" popover="{{item.vcTooltip}}" > </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm mt-3 mb-3">
+            <p>
+              El proceso de registro de obra es el siguiente:
+            </p>
+            <br>
+            <div class="row">
+              <div class="col-sm text-center">
+                <img class="img-fluid mx-auto d-block align-bottom _img1" src="./assets/images/hflow.png"
+                  draggable="false">
+                <img class="img-fluid mx-auto d-block align-bottom _img2" src="./assets/images/vflow.png"
+                  draggable="false">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-3 mb-1">
+            <p>
+              ¿Desea mas información?
+            </p>
+          </div>
+          <div class="col-sm">
+            <button type="button" class="btn btn-warning _btnround" routerLink="/mas-informacion">
+              ingrese aquí
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-3 mb-1">
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-3 _txtley">
+            En cumplimiento de lo dispuesto por la Ley N° 29733, Ley de Protección de Datos Personales, le
+            informamos que los datos personales que usted nos proporcione serán utilizados y/o tratados por el
+            Indecopi (por sí mismo o a través de terceros), estricta y únicamente para el servicio de registro de
+            Obras de la Dirección de Derecho de Autor, pudiendo ser incorporados en un banco de datos personales de
+            titularidad del Indecopi. Se informa que el Indecopi podría compartir y/o usar y /o almacenar y/o
+            transferir dicha información a terceras personas, estrictamente con el objeto de realizar las actividades
+            antes mencionadas. Usted podrá ejercer sus derechos de información, acceso, rectificación, cancelación y
+            oposición de sus datos personales, en cualquier momento, a través de las mesas de partes de las oficinas
+            del Indecopi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isModalShown" [config]="{ show: true, ignoreBackdropClick: true }" (onHidden)="onHidden()" bsModal
+  #modalTerminos="bs-modal" class="modal fade"  role="dialog" aria-labelledby="dialog-auto-name" data-keyboard="false" data-backdrop="static" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Consideraciones</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-3">
+          <div class="col-sm-12">
+            <div class="table-responsive">
+              <table class="table">
+                <tbody *ngFor="let item of objTerminos?.lstTerminos; let row = index">
+                  <tr>
+                    <th>{{item.nuItem}}</th>
+                    <td> <div [innerHTML]="item.vcDescTermino"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <form [formGroup]="terminosForm">
+
+          <div class="row mt-3">
+            <div class="col-12">
+            
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" value="1" #cbTerminos formControlName="blTerminos"
+                    (change)="onChangeTerminos($event)">
+                  <label class="form-check-label" for="cbTerminos">
+                    Acepto haber leído las consideraciones del servicio
+                  </label>
+                </div>
+
+            </div>
+          </div>
+          
+
+          <div class="row">
+            <div class="col-6">
+              
+              <button type="button" class="btn btn-danger btn-default btn-block" (click)="goServicios()">Cancelar</button>
+              
+            </div>
+            <div class="col-6">
+  
+              <button type="button" class="btn  btn-success btn-default btn-block" (click)="aceptarTerminos()"
+              [disabled]="blValidTerminos">Aceptar</button>
+            </div>
+          </div>
+          
+
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>

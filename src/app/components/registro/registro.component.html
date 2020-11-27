@@ -1,0 +1,116 @@
+<!-- Spinner -->
+<ng-container *ngIf="spinner">
+  <app-spinner [descripcion]="spinnerMsg"></app-spinner>
+</ng-container>
+<!-- Spinner -->
+
+<app-menu></app-menu>
+<app-banner-principal></app-banner-principal>
+<app-stepper [activo]="nuDestino"></app-stepper>
+
+<div class="container d-print-none">
+  <!-- Titulo -->
+  <div class="row" *ngIf="nuDestino!=5">
+    <div class="col-sm text-left">
+      <h5 id="header-and-footer">
+        <span style="margin-right: 5px; vertical-align: middle;">
+          <img src="./assets/images/{{objInfo.vcImg}}.png" draggable="false" width="50">
+        </span>
+        <span class="bd-content-title text-uppercase font-mb h4">{{objInfo.vcTitulo}}</span>
+      </h5>
+    </div>
+  </div>
+  <!-- Titulo -->
+</div>
+
+<!-- Step 1 -->
+<app-datos-obra #appDatosObra [hidden]="nuDestino!=1" (propagar)="nuDestino=$event"
+  (spinnerEvent)="spinnerEventHander($event)" (validEvent)="validEventHanderDatosObra($event)"></app-datos-obra>
+
+<!-- Step 2 -->
+<app-obra-literaria #appAutoriaObra [hidden]="nuDestino!=2" (propagar)="nuDestino=$event"
+  (spinnerEvent)="spinnerEventHander($event)" (validEvent)="validEventHanderAutoriaObra($event)"></app-obra-literaria>
+
+<!-- Step 3 -->
+<app-archivo-obra #appArchivoObra [hidden]="nuDestino!=3" (propagar)="nuDestino=$event"
+  (spinnerEvent)="spinnerEventHander($event)" (validEvent)="validEventHanderArchivoObra($event)"></app-archivo-obra>
+
+<!-- Step 4 -->
+<app-registrar-pago #appPagoObra [hidden]="nuDestino!=4" (propagar)="nuDestino=$event"
+  (spinnerEvent)="spinnerEventHander($event)" (validEvent)="validEventHanderPagoObra($event)"></app-registrar-pago>
+
+<!-- Step 5 -->
+<app-verificar-registro #appVerificarObra [hidden]="nuDestino!=5" (propagar)="nuDestino=$event"
+  (spinnerEvent)="spinnerEventHander($event)" (navigateEvent)="navigateEventHander($event)"></app-verificar-registro>
+
+<div class="container d-print-none">
+  <!-- Botones -->
+  <div class="row mt-3">
+    <div class="col-sm">
+      <hr>
+      <!-- Btn Atras -->
+      <button type="submit" class="btn btn-default float-left" *ngIf="nuDestino==1" routerLink="/inicio">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-default float-left" *ngIf="nuDestino==2" (focus)="appAutoriaObra.atras()">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-default float-left" *ngIf="nuDestino==3" (focus)="appArchivoObra.atras()">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-default float-left" *ngIf="nuDestino==4" (focus)="appPagoObra.atras()">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-default float-left" *ngIf="nuDestino==5" (focus)="appVerificarObra.atras()">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <!-- Btn Atras -->
+
+      <!-- Btn Siguiente -->
+      <!-- <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appDatosObra.siguiente()" (focus)="appAutoriaObra.cargarDatos()" *ngIf="nuDestino==1"
+        [disabled]="false">Siguiente 1
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appAutoriaObra.siguiente()" (focus)="appArchivoObra.cargarDatos()" *ngIf="nuDestino==2"
+        [disabled]="false">Siguiente 2
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appArchivoObra.siguiente()" (focus)="appPagoObra.cargarDatos()" *ngIf="nuDestino==3"
+        [disabled]="false">Siguiente 3
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appPagoObra.siguiente()" (focus)="appVerificarObra.cargarDatos()" *ngIf="nuDestino==4">Siguiente 4
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appVerificarObra.enviarSolicitud(modConfirmacion)" *ngIf="nuDestino==5">Enviar Solicitud
+        <i class="fa fa-arrow-right ml-3"></i></button> -->
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appDatosObra.siguiente()" (focus)="appAutoriaObra.cargarDatos()" *ngIf="nuDestino==1"
+        [disabled]="validDatosObra">Siguiente
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appAutoriaObra.siguiente()" (focus)="appArchivoObra.cargarDatos()" *ngIf="nuDestino==2"
+        [disabled]="validAutoriaObra">Siguiente
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appArchivoObra.siguiente()" (focus)="appPagoObra.cargarDatos()" *ngIf="nuDestino==3"
+        [disabled]="validArchivoObra">Siguiente
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appPagoObra.siguiente()" (focus)="appVerificarObra.cargarDatos()" *ngIf="nuDestino==4"
+        [disabled]="validPagoObra">Siguiente
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (focus)="appVerificarObra.enviarSolicitud(modConfirmacion)" *ngIf="nuDestino==5">Enviar Solicitud
+        <i class="fa fa-arrow-right ml-3"></i></button>
+      <!-- Btn Siguiente -->
+    </div>
+  </div>
+  <!-- Botones -->
+</div>

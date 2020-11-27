@@ -1,0 +1,18 @@
+._link{
+    color: #007bff !important;
+    text-decoration: none !important;
+}
+._link:hover{
+    cursor: pointer !important;
+    text-decoration: underline !important;
+}
+
+@media (max-width: 575px) {
+    ._img1{ display: none !important; }
+    ._img2{ display: inline !important; }    
+}
+
+@media (min-width: 576px) {
+    ._img1{ display: inline !important; }
+    ._img2{ display: none !important; }
+}

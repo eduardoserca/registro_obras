@@ -1,0 +1,61 @@
+<div class="container-fluid d-print-none">
+  <div class="row pt-3 pb-3">
+    <div class="col-sm-12">
+      <div class="btn-group" dropdown>
+        <button id="button-menu-dividers" dropdownToggle type="button" class="btn btn-dark dropdown-toggle"
+          aria-controls="dropdown-menu-dividers">
+          <i class="material-icons" style="vertical-align: middle;">menu</i>
+          <!-- Búsquedas gratuitas  -->
+          <span class="caret"></span>
+        </button>
+        <ul id="dropdown-menu-dividers" *dropdownMenu class="dropdown-menu" role="menu"
+          aria-labelledby="button-menu-dividers">
+          <li role="menuitem"><a class="dropdown-item" routerLink="/inicio">Inicio</a></li>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Registro de Obras</h6>
+          <!-- <li role="menuitem" *ngFor="let item of lstProcesos; let row = index;">
+            <a class="dropdown-item" (click)="rutaNavegacion(item)">
+              <img src="{{item.vcImgLogo}}" draggable="false" width="30">
+              {{item.vcTituloCorto}}</a></li> -->
+          <li role="menuitem" class="_link"><a class="dropdown-item" (click)="rutaNavegacion(1)">
+              <img src="./assets/images/obra-literaria.png" draggable="false" width="30">
+              Registro Obras Literarias</a>
+          </li>
+          <li role="menuitem" class="_link"><a class="dropdown-item" (click)="rutaNavegacion(2)">
+              <img src="./assets/images/obra-artistica.png" draggable="false" width="30">
+              Registro Obras Artísticas</a>
+          </li>
+          <div class="dropdown-divider"></div>
+          <li role="menuitem" class="_link"><a class="dropdown-item" routerLink="/mas-informacion">
+              <img src="./assets/images/obra-artistica.png" draggable="false" width="30">
+              Mas Información</a>
+          </li>
+          <li role="menuitem" class="_link"><a class="dropdown-item" routerLink="/terminos-condiciones">
+              <img src="./assets/images/obra-artistica.png" draggable="false" width="30">
+              Términos y Condiciones</a>
+          </li>
+          <!-- <li role="menuitem"><a class="dropdown-item" routerLink="/busqueda-titular">
+              <img src="./assets/images/titular.png" draggable="false" width="30">
+              Búsqueda por Titular</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/busqueda-denunciante/1">
+              <img src="./assets/images/denunciante.png" draggable="false" width="30">
+              Búsqueda por Denunciante</a>
+          </li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/busqueda-denunciado/2">
+              <img src="./assets/images/denunciado.png" draggable="false" width="30">
+              Búsqueda por Denunciado</a>
+          </li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/busqueda-sancionado/3">
+              <img src="./assets/images/sancionado.png" draggable="false" width="30">
+              Búsqueda por Sancionado</a>
+          </li> -->
+        </ul>
+      </div>
+      <img style="border-left: 1px solid #848687; padding-left: 15px;" class="ml-3" src="./assets/images/logo.png"
+        draggable="false">
+    </div>
+    <!-- <div class="col-sm-1">
+      
+    </div> -->
+  </div>
+</div>

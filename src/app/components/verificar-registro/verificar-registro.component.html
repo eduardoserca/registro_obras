@@ -1,0 +1,215 @@
+<!-- Spinner -->
+<!-- <ng-container *ngIf="spinner">
+  <app-spinner [descripcion]="spinnerMsg"></app-spinner>
+</ng-container> -->
+<!-- Spinner -->
+
+<!-- <app-example></app-example> -->
+
+<!-- <app-menu></app-menu>
+<app-banner-principal></app-banner-principal>
+<app-stepper [activo]="6"></app-stepper> -->
+
+<div class="container d-print-none">
+
+  <!-- Titulo -->
+  <div class="row" *ngIf="vcImg">
+    <div class="col-sm text-center">
+      <h5 id="header-and-footer">
+        <span style="margin-right: 5px; vertical-align: middle;">
+          <img src="./assets/images/{{vcImg}}.png" draggable="false" width="50">
+          <!-- <i class="fas fa-book-open fa-2x text-success"></i> -->
+          <!-- <i class="material-icons text-center">how_to_reg</i> -->
+          <!-- <img src="./assets/images/titular.png" draggable="false" width="50"> -->
+        </span>
+        <p class="bd-content-title font-mb h4">Verifica la información</p>
+      </h5>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm">
+      <h4>Resumen de solicitud de registro</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span class="badge badge-success mr-2">1</span>Verifica la autoría de la obra</h5>
+
+          <ul class="list-unstyled" *ngFor="let item of objResumen?.lstPersona">
+            <li><b> Persona natural <span class="_uppercase">({{item.vcDescTipoDocumento}}: {{item.vcDocIdentidad}})
+                </span></b></li>
+            <li>Nombres y Apellidos: <span class="_uppercase">{{item.vcNombres}} {{item.vcApPaterno}}
+                {{item.vcApMaterno}}</span></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6  mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span class="badge badge-success mr-2">3</span>Adjunta archivos</h5>
+          <p><b>Documentos adjuntos</b></p>
+          <ul class="list-unstyled">
+            <li *ngFor="let item of objResumen?.lstArchivo ; let row = index ">
+              <label *ngIf="item.nuIdTipoArchivo >0">Obra {{vcLabelObra}}:</label>
+              <label *ngIf="item.nuIdTipoArchivo == -1">Autorización de autor de obra originaria:</label>
+              <label *ngIf="item.nuIdTipoArchivo == 0 && objResumen?.objObra.nuFlagDerivacion==0 && objResumen?.objObra.nuFlagAutorObOri==0">Anexo {{row}}</label>
+              <label *ngIf="item.nuIdTipoArchivo == 0 && objResumen?.objObra.nuFlagDerivacion==1 && objResumen?.objObra.nuFlagAutorObOri==1">Anexo {{row}}</label>
+              <label *ngIf="item.nuIdTipoArchivo == 0 && objResumen?.objObra.nuFlagDerivacion==1 && objResumen?.objObra.nuFlagAutorObOri==0">Anexo {{row-1}}</label>
+              <a (click)="descargarArchivo(item)" class="_link">&nbsp;{{item.vcNomOriginal}}.{{item.vcExtension}}</a>
+            </li>
+          </ul>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6  mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span class="badge badge-success mr-2">2</span>Ingresa los datos de tu obra</h5>
+          <p class="card-text"><b>Título de la obra</b></p>
+          <p class="card-subtitle mb-2 text-muted _uppercase">{{objResumen?.objObra.vcTitulo}}</p>
+          <p class="card-text"><b>¿La obra se publicó?</b></p>
+          <p class="card-subtitle mb-2 text-muted">
+            <label *ngIf="objResumen?.objObra.nuFlagPublicacion == 1">Sí</label>
+            <label *ngIf="objResumen?.objObra.nuFlagPublicacion == 0">No</label>
+          </p>
+          <p class="card-text"><b>¿La obra es originaria o derivada?</b></p>
+          <p class="card-subtitle mb-2 text-muted">
+            <label *ngIf="objResumen?.objObra.nuFlagDerivacion == 0">Originaria</label>
+            <label *ngIf="objResumen?.objObra.nuFlagDerivacion == 1">Derivada</label>
+          </p>
+          <!-- <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6  mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span class="badge badge-success mr-2">4</span>Registra el pago</h5>
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+          <p><b>Arancel de Registro de Obras {{vcLabelObras}}</b></p>
+          <ul class="list-unstyled">
+            <li>Fecha: {{objResumen?.objPago.dtFechaOperacion}}</li>
+            <li>Número de operación: {{objResumen?.objPago.vcNroOperacion}}</li>
+            <li>Monto: S/ {{objResumen?.nuMontoArancel}}</li>
+            <!-- <li class="list-group-item">Porta ac consectetur ac</li>
+                          <li class="list-group-item">Vestibulum at eros</li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+        <i class="fa fa-arrow-left"></i>
+        Atrás
+      </button>
+      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target=".bd-example-modal-lg">
+        Enviar Solicitud
+        <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div> -->
+  <!-- Registro de pago -->
+
+  <!-- Contenido -->
+
+  <!-- Botones -->
+  <!-- <div class="row mt-3">
+    <div class="col-sm">
+      <hr>
+      <button type="submit" class="btn btn-default float-left" routerLink="/registrar-pago">
+        <i class="fa fa-arrow-left mr-3"></i>
+        Atrás
+      </button>
+      <button type="submit" class="btn btn-warning float-right _btnround _color-warning"
+        (click)="enviarSolicitud(modConfirmacion)">Enviar Solicitud <i class="fa fa-arrow-right ml-3"></i></button>
+    </div>
+  </div> -->
+  <!-- Botones -->
+
+  <div class="row">
+    <div class="col-sm text-center">
+      <img class="img-fluid mx-auto d-block align-bottom _img1" src="./assets/images/hflow.png" draggable="false">
+      <img class="img-fluid mx-auto d-block align-bottom _img2" src="./assets/images/vflow.png" draggable="false">
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal confirmacion -->
+<div *ngIf="isModalShown" [config]="{ show: true, ignoreBackdropClick: true }" (onHidden)="onHidden()" bsModal
+  #modalConfirmacion="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+      <!-- <h4 class="modal-title pull-left">Consideraciones</h4> -->
+      <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      <!-- </div> -->
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm text-center">
+              <h5 id="header-and-footer">
+                <span style="margin-right: 5px; vertical-align: middle;">
+                  <i class="fas fa-check-circle fa-5x text-success"></i>
+                </span>
+                <p class="bd-content-title font-mb h4 text-success mt-2">¡SOLICITUD DE REGISTRO INGRESADA
+                  SATISFACTORIAMENTE!
+                </p>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm text-center">
+              <h6>El proceso de solicitud de registro de obra {{vcLabelObra | lowercase}} ha
+                culminado. </h6>
+              <h6>Para mayor información, revise su correo electrónico. </h6>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm text-center">
+              <h5>Nro. de Expediente: {{vcCodExpediente}}</h5>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm text-center">
+              <button type="button" class="btn btn-warning text-black" (click)="finalizar()"><b>Finalizar</b></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <form [formGroup]="terminosForm">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="" id="cbTerminos" formControlName="blTerminos">
+            <label class="form-check-label" for="cbTerminos">
+              Acepto haber leído las consideraciones del servicio
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+      <button type="button" class="btn btn-success" (click)="aceptarTerminos()"
+        [disabled]="terminosForm.invalid">Aceptar</button>
+    </div>
+    </form>
+  </div> -->
+    </div>
+  </div>
+</div>
+<!-- Modal confirmacion -->
