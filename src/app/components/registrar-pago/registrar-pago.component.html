@@ -65,7 +65,7 @@
           <tbody>
             <tr *ngFor="let item of lstAranceles; let row = index">
               <th scope="row">{{row+1}}</th>
-              <td>{{item.vcDescArancel}}</td>
+              <td>{{item.vcCodigoBN}} - {{item.vcDescArancel}}</td>
               <td>1</td>
               <td>S/ {{item.nuImporteBruto}}</td>
               <td>S/ {{item.nuImporteNeto}}</td>
