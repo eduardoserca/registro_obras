@@ -36,7 +36,7 @@
   <!-- Contenido -->
   <div class="row">
     <div class="col-sm">
-      <h4>Monto del arancel a pagar</h4>
+      <h4>Monto del arancel a pagar[cesc]</h4>
     </div>
   </div>
   <!-- <div class="row">
@@ -167,15 +167,32 @@
           Ingresando al enlace&nbsp;<a href="https://www.pagalo.pe" target="_blank">pagalo.pe</a>&nbsp;puede pagar sus aranceles utilizando tarjetas de crédito o débito Visa, MasterCard y American Express
          </div>
         </div>
-        <tabset>
-          <tab heading="Pagalo.pe" id="tab1">
-            <img src="./assets/images/pagalo-voucher.png" width="80%" draggable="false">
-            <!-- <a href="https://pagalo.pe/" target="_blank">https://www.pagalo.pe</a> -->
-          </tab>
-          <tab heading="Banco de la Nación">
-            <img src="./assets/images/bn-voucher.png" width="80%" draggable="false">
-          </tab>
-        </tabset>
+        
+        <div *ngIf="globalService.nroProceso === 1">
+            <tabset>
+                <tab heading="Pagalo.pe" id="tab1">
+                  <img src="./assets/images/pagalo-voucher-obra-literaria.png" width="80%" draggable="false">
+                  <!-- <a href="https://pagalo.pe/" target="_blank">https://www.pagalo.pe</a> -->
+                </tab>
+                <tab heading="Banco de la Nación">
+                  <img src="./assets/images/bn-voucher-literaria.png" width="80%" draggable="false">
+                </tab>
+              </tabset>
+          
+        </div>
+        <div *ngIf="globalService.nroProceso === 2">
+          Estoy en una obra ARTISTICA
+          <tabset>
+              <tab heading="Pagalo.pe" id="tab1">
+                <img src="./assets/images/pagalo-voucher-obra-artistica.png" width="80%" draggable="false">
+                <!-- <a href="https://pagalo.pe/" target="_blank">https://www.pagalo.pe</a> -->
+              </tab>
+              <tab heading="Banco de la Nación">
+                <img src="./assets/images/bn-voucher-artistica.png" width="80%" draggable="false">
+              </tab>
+            </tabset>
+        </div>
+        
       </div>
       <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
