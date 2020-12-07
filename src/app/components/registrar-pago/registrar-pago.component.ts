@@ -77,12 +77,11 @@ export class RegistrarPagoComponent implements OnInit {
 
   cargarArancel() {
     // this.spinner = true;
-    this.spinnerEvent.emit(true);
-    // this.globalService.vcCodArancel;
-    // console.log('cod arancel: ' + this.globalService.vcCodArancel);
+    this.spinnerEvent.emit(true);    
     let params: any = {
       vcTextoBusqueda: this.globalService.vcCodArancel
     };
+    
     this.arancelService.getWithPost$(params).subscribe(
       resp => {
         if (resp.nuError === 0) {
@@ -106,13 +105,11 @@ export class RegistrarPagoComponent implements OnInit {
 
   calcularTotal() {
     this.lstAranceles.forEach(item => {
-      // console.log('suma: ' + item.nuImporteNeto);
       this.sumTotalArancel += item.nuImporteNeto;
     });
   }
 
   agregarPago() {
-    // console.log('agregarPago');
     // this.spinner = true;
     this.spinnerEvent.emit(true);
     let objForm = this.pagoForm.value;
@@ -127,9 +124,9 @@ export class RegistrarPagoComponent implements OnInit {
         dtFechaOperacion: this.convertirFecha(objForm.dtFechaOperacion),
       }
     };
+
     this.pagoService.getWithPost$(params).subscribe(
       resp => {
-        // console.log('data pago: ' + JSON.stringify(resp));
         if (resp.nuError === 0) {
           // this.lstAranceles = resp.lstAranceles;
           this.globalService.montoArancel = resp.objPago.nuMonto;
@@ -142,15 +139,14 @@ export class RegistrarPagoComponent implements OnInit {
         this.spinnerEvent.emit(false);
       },
       error => {
-        // this.spinner = false;
+        // this.spinner = false;        
         this.spinnerEvent.emit(false);
         this.toast.showToast('Error', CONSTANTES.msg_error.msg, 'error');
       }
-    );
+    ); 
   }
 
   addPago() {
-    // console.log('addPago');
     if (!this.pagoForm.valid)
       return;
     let objForm = this.pagoForm.value;
@@ -166,7 +162,6 @@ export class RegistrarPagoComponent implements OnInit {
   }
 
   eliminarPago() {
-    // console.log('eliminarPago');
     this.pagoForm.reset();
     this.objPago = {};
     this.blValidarPago = false;
